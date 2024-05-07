@@ -1,1 +1,188 @@
 //주차장//
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class UserInfo {
+public:
+    string Name;
+    string PhoneNumber;
+    string Manufacturer;
+    string CarNumber;
+    string CarType;
+    string FuelType;
+public:
+    UserInfo(string Name, string PhoneNumber, string Manufacturer, string CarNumber, string CarType, string FuelType)
+    : Name(Name), PhoneNumber(PhoneNumber), Manufacturer(Manufacturer), CarNumber(CarNumber), CarType(CarType), FuelType(FuelType) {}
+
+    string GetName() const { return Name; }
+    string GetPhoneNumber() const { return PhoneNumber; }
+    string GetManufacturer() const { return Manufacturer; }
+    string GetCarNumber() const { return CarNumber; }
+    string GetCarType() const { return CarType; }
+    string GetFuelType() const { return FuelType; }
+
+    void PrintInfo() const {
+        cout << "Name: " << Name << endl;
+        cout << "PhoneNumber: " << PhoneNumber << endl;
+        cout << "Manufacturer: " << Manufacturer << endl;
+        cout << "CarNumber: " << CarNumber << endl;
+        cout << "CarType: " << CarType << endl;
+        cout << "FuelType: " << FuelType << endl;
+    }
+};
+
+vector<UserInfo> database;
+
+void enter_DB() {
+    string Name, PhoneNumber, Manufacturer, CarNumber, CarType, FuelType;
+
+    cout << "Name : ";
+    cin >> Name;
+    
+    cout << "PhoneNumber : ";
+    cin >> PhoneNumber;
+    
+    cout << "Manufacturer : ";
+    cin >> Manufacturer;
+    
+    cout << "차 번호 : ";
+    cin >> CarNumber;
+    
+    cout << "차 종류 : ";
+    cin >> CarType;
+    
+    cout << "휘발유,경유 : ";
+    cin >> FuelType;
+    
+    UserInfo newUser(Name, PhoneNumber, Manufacturer, CarNumber, CarType, FuelType);
+    database.push_back(newUser);
+    cout << "데이터를 성공적으로 입력했습니다." << endl;
+}
+
+struct CarInfo {
+    string name;        // 이름
+    string phoneNumber; // 전화번호
+    string manufacturer; // 차량 제조사
+    string carNumber;   // 차량 번호
+    string carModel;    // 차종
+    string fuelType;    // 연료 종류
+};
+
+vector<CarInfo> carDatabase;
+
+void search_DB() {
+    if (carDatabase.empty()) {
+        cout << "The database is empty." << endl;
+        return;
+    }
+    else{
+        cout << "어떤 정보를 보실할건가요?" << endl;
+    }
+
+    for (const auto& car : carDatabase) {
+        cout << "Name: " << car.name << endl;
+        cout << "PhoneNumber: " << car.phoneNumber << endl;
+        cout << "Manufacturer: " << car.manufacturer << endl;
+        cout << "Number: " << car.carNumber << endl;
+        cout << "Model: " << car.carModel << endl;
+        cout << "Fuel_Type: " << car.fuelType << endl;
+        cout << "--------------------------" << endl;
+    }
+}
+void revise_DB(){
+    
+}
+void show_DB() {
+    if (database.empty()) {
+        cout << "empty database." << endl;
+        return;
+    }
+    
+    for (const auto& info : database) {
+        cout << "Name: " << info.Name
+             << ", PhoneNumber: " << info.PhoneNumber
+             << ", Manufacturer: " << info.Manufacturer
+             << ", CarNumber: " << info.CarNumber
+             << ", CarType: " << info.CarType
+             << ", FuelType: " << info.FuelType << endl;
+    }
+}
+
+void reset_DB() {
+    database.clear();
+}
+void add_DB(){
+    
+}
+void delete_DB(){
+    
+}
+void enter(){
+    
+}
+void search(){
+    
+}
+void revise(){
+    
+}
+void show(){
+    
+}
+void add(){
+    
+}
+void delete_info(){
+    
+}
+
+int main() {
+    int select_num;
+    bool isRunning = true; // 프로그램이 실행 중인지를 확인하는 변수
+
+    while(isRunning) {
+        cout << "1 : 정보입력, 2 : 정보검색, 3 : 정보수정, 4 : 정보보기, 5 : 정보추가, 6 : 정보삭제, 7 : 초기화, 8 : 종료" << endl;
+        cout << "원하는 번호를 입력하세요 : ";
+        cin >> select_num;
+
+        switch(select_num) {
+            case 1:
+                enter_DB();
+                cout << "어떤 정보를 입력할건가요?" << endl;
+                break;
+            case 2:
+                search_DB();
+                cout << "어떤 정보를 검색할건가요?" << endl;
+                break;
+            case 3:
+                cout << "어떤 정보를 수정할건가요?" << endl;
+                break;
+            case 4:
+                show_DB();
+                break;
+            case 5:
+                cout << "어떤 정보를 추가할건가요?" << endl;
+                break;
+            case 6:
+                cout << "어떤 정보를 삭제할건가요?" << endl;
+                break;
+            case 7:
+                cout << "프로그램을 초기화합니다." << endl;
+                reset_DB();
+                break;
+            case 8:
+                cout << "프로그램을 종료합니다." << endl;
+                isRunning = false; // 프로그램을 종료하기 위해 false로 설정
+                break;
+            default:
+                cout << "잘못된 입력입니다. 1부터 8까지의 번호를 입력해주세요." << endl;
+                break;
+        }
+    }
+
+    return 0;
+}
